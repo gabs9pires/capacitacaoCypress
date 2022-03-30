@@ -14,8 +14,9 @@ describe('Cypress basic', () =>{
         
     })
 
-    it.only('Should find and interact whit an element', () =>{
+    it('Should find and interact whit an element', () =>{
         cy.visit('https://wcaquino.me/cypress/componentes.html')
         cy.get('#buttonSimple').click()
+        cy.get('#buttonSimple').should('have.value', 'Obrigado!')
     })
 })
