@@ -50,7 +50,7 @@ describe('Work with basic elements', () => {
         cy.get('#formSexoMasc').should('not.be.checked')
     })
 
-    it.only('Checkbox', () =>{
+    it('Checkbox', () =>{
         cy.get('#formComidaPizza')
             .click()
             .should('be.checked')
@@ -61,6 +61,22 @@ describe('Work with basic elements', () => {
         //
         
         cy.get('#formComidaPizza').should('not.be.checked')
-     })
+    })
+
+    it.only('Combo', () =>{
+        cy.get('[data-test=dataEscolaridade]')
+            .select('2o grau completo')
+            .should('have.value', '2graucomp')
+        //
+
+        cy.get('[data-test=dataEscolaridade]')
+            .select('1graucomp')
+            .should('have.value', '1graucomp')
+            //é possível selecionar tanto pelo value quanto pelo texto
+            //mas pra validar valor é só pelo value
+        //
+
+    })
+
 })
 
