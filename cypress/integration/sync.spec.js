@@ -4,7 +4,7 @@
 describe('Working with sync', () => {
 
     before( () => {
-        cy.visit('https://wcaquino.me/cypress/componentes.html')
+        cy.visit('http://wcaquino.me/cypress/componentes.html')
     })
     
     beforeEach( () => {
@@ -24,7 +24,9 @@ describe('Working with sync', () => {
         cy.get('#novoCampo').should('exist')
     })
 
-    it.only('Uso do find', () =>{
+    it
+    
+    ('Uso do find', () =>{
         cy.get('#buttonList').click();
         cy.get('#lista li')
         //fazer uma busca mais reduzida a partir desse get 
@@ -39,6 +41,27 @@ describe('Working with sync', () => {
 
         cy.get('#lista li span')
         .should('contain', 'Item 2')
-
     })
+
+    it('Using timeout', () => {
+        cy.get('#buttonListDOM').click()
+        //cy.wait(5000)
+        //aqui ele vai parar pelos 5sec
+        cy.get('#lista li span', {timeout: 30000})
+        //esse timeout não vai esperar esses sec, ele pode rodar esse tempo podendo encerrar
+        //antes caso a condição seja aceita
+            .should('contain', 'Item 2')
+    })
+
+    it.only('Should vs then', () =>{
+        cy.get('#buttonListDOM').click()
+        cy.get('#lista li span').should($el => {
+            //o should fica executando enquanto espera o get ser concluído
+            //o .then ele aguarda o get ser finalizado para fazer sua execução 
+            console.log($el)
+            expect($el).to.have.length(1)
+        })
+    })
+
+
 })
