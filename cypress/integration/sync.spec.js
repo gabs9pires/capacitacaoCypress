@@ -58,6 +58,7 @@ describe('Working with sync', () => {
         cy.get('#lista li span').should($el => {
             //o should fica executando enquanto espera o get ser concluído
             //o .then ele aguarda o get ser finalizado para fazer sua execução 
+            //ele também não precisa retornar o mesmo objeto que foi recebido diferente do should 
             console.log($el)
             expect($el).to.have.length(1)
         })
